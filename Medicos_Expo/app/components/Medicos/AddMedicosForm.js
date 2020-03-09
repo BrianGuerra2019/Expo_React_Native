@@ -8,6 +8,7 @@ import Modal from "../Modal";
 import * as Location from "expo-location";
 import uuid from "uuid/v4";
 import { v4 as uuidv4 } from "uuid";
+import * as Random from "expo-random";
 
 import { firebaseApp } from "../../utils/Firebase";
 import firebase from "firebase/app";
@@ -17,7 +18,7 @@ const db = firebase.firestore(firebaseApp);
 const WindtScreen = Dimensions.get("window").width;
 
 export default function AddMedicosForm(props) {
-  const { toastRef, setIsLoading, navigation } = props;
+  const { toastRef, setIsLoading, navigation, setIsReloadMedicosServ } = props;
   const [imagesSelected, setImagesSelected] = useState([]);
   const [medicoName, setMedicoName] = useState("");
   const [medicoAdress, setMedicoAdress] = useState("");
@@ -42,7 +43,7 @@ export default function AddMedicosForm(props) {
       setIsLoading(true);
       uploadImagesStorage(imagesSelected).then(arrayImages => {
         console.log(arrayImages);
-        window.crypto.getRandomValues(arrayImages); //opcional, no es del codigo
+        // window.crypto.getRandomValues(arrayImages); //opcional, no es del codigo
         db.collection("servicios")
           .add({
             name: medicoName,
@@ -58,7 +59,8 @@ export default function AddMedicosForm(props) {
           })
           .then(() => {
             setIsLoading(false);
-            navigation.navigate("Principal");
+            setIsReloadMedicosServ(true);
+            navigation.navigate("Medicos");
           })
           .catch(() => {
             setIsLoading(false);
@@ -79,7 +81,7 @@ export default function AddMedicosForm(props) {
         const ref = firebase
           .storage()
           .ref("servicios-imagenes")
-          .child(uuidv4());
+          .child(uuid());
         await ref.put(blob).then(result => {
           imagesBlob.push(result.metadata.name);
         });

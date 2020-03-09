@@ -6,6 +6,7 @@ import AddMedicosForm from "../../components/Medicos/AddMedicosForm";
 
 export default function AddMedicos(props) {
   const { navigation } = props;
+  const { setIsReloadMedicosServ } = navigation.state.params;
   const toastRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -14,6 +15,7 @@ export default function AddMedicos(props) {
         toastRef={toastRef}
         setIsLoading={setIsLoading}
         navigation={navigation}
+        setIsReloadMedicosServ={setIsReloadMedicosServ}
       />
       <Toast ref={toastRef} position="center" opacity={0.5} />
       <Loading isVisible={isLoading} text="Creando Servicio" />
