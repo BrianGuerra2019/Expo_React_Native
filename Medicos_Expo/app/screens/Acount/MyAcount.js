@@ -4,7 +4,7 @@ import Loading from "../../components/Loading";
 import { View, Text } from "react-native";
 import UserGuest from "./UserGuest";
 import UserLogged from "./UserLogged";
-
+//Pagina principal de Cuenta
 export default function MyAcount() {
   const [login, setLogin] = useState(null);
 

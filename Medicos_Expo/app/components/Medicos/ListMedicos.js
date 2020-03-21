@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Image } from "react-native-elements";
 import * as firebase from "firebase";
-
+//vista que carga la inforacion de cada servicio exitente
 export default function ListMedicos(props) {
   const { medicosServ, isLoading, handleLoadMore, navigation } = props;
 
@@ -39,7 +39,8 @@ function MedicosSe(props) {
   const { medicosSe, navigation } = props;
   const { name, address, description, images } = medicosSe.item.servMedico;
   const [imageMedicoSer, setImageMedicoSer] = useState(null);
-
+  //console.log("lista medicos");
+  //console.log(medicosSe.item.servMedico);
   useEffect(() => {
     async function fetchData() {
       const image = images[0];
@@ -58,7 +59,11 @@ function MedicosSe(props) {
   }, []);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Servicio", { medicosSe })}
+      onPress={() =>
+        navigation.navigate("Servicio", {
+          medicosSe: medicosSe.item.servMedico
+        })
+      }
     >
       <View style={styles.viewMedicos}>
         <View style={styles.viewMedicosImage}>

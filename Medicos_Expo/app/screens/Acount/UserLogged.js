@@ -6,7 +6,7 @@ import InfoUser from "../../components/Account/InfoUser";
 import Toast from "react-native-easy-toast";
 import Loading from "../../components/Loading";
 import AccountOptions from "../../components/Account/AccountOptions";
-
+//Pagina de usuario logueado
 export default function UserLogged() {
   const [userInfo, setUserInfo] = useState({});
   const [reloadData, setReloadData] = useState(false);

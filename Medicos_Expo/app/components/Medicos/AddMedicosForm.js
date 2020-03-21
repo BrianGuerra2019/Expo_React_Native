@@ -42,7 +42,7 @@ export default function AddMedicosForm(props) {
     } else {
       setIsLoading(true);
       uploadImagesStorage(imagesSelected).then(arrayImages => {
-        console.log(arrayImages);
+        // console.log(arrayImages);
         // window.crypto.getRandomValues(arrayImages); //opcional, no es del codigo
         db.collection("servicios")
           .add({

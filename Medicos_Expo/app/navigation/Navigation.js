@@ -7,6 +7,8 @@ import TopListScreenStacks from "./TopListStacks";
 import SearchScreenStacks from "./SearchStacks";
 import AccountScreenStacks from "./AccountStacks";
 // import SplashScreen from "../screens/SplashScreen";
+import FavoritesScreenStacks from "./FavoritesStacks";
+//importar las vistas que se necesitan en la pantalla
 
 const NavigationStacks = createBottomTabNavigator(
   {
@@ -44,6 +46,20 @@ const NavigationStacks = createBottomTabNavigator(
         )
       })
     },
+    Favorites: {
+      screen: FavoritesScreenStacks,
+      navigationOptions: () => ({
+        tabBarLabel: "Favoritos",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            type="material-community"
+            name="heart-outline"
+            size={22}
+            color={tintColor}
+          />
+        )
+      })
+    },
     Search: {
       screen: SearchScreenStacks,
       navigationOptions: () => ({
@@ -75,7 +91,7 @@ const NavigationStacks = createBottomTabNavigator(
   },
   {
     initialRouteName: "Principal",
-    order: ["Principal", "TopLists", "Search", "Account"],
+    order: ["Principal", "TopLists", "Favorites", "Search", "Account"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
       activeTintColor: "#3377FF"

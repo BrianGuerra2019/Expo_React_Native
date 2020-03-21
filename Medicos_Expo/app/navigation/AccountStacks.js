@@ -3,7 +3,7 @@ import MyAccountScreen from "../screens/Acount/MyAcount";
 import LoginScreen from "../screens/Acount/Login";
 import RegisterScreen from "../screens/Acount/Register";
 import RegisterSocioScreen from "../screens/Acount/RegisterSocio";
-
+//importacion de las vistas de la cuenta
 export const AccountScreenStacks = createStackNavigator({
   MyAccount: {
     screen: MyAccountScreen,

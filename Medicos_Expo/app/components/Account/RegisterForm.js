@@ -5,7 +5,7 @@ import { validateEmail } from "../../utils/Validation";
 import * as firebase from "firebase";
 import { withNavigation } from "react-navigation";
 import Loading from "../Loading";
-
+//Pagina de los campos para el registro de usuarios
 function RegisterForm(props) {
   const { toastRef, navigation } = props;
   const [hidePassword, setHidePassword] = useState(true);

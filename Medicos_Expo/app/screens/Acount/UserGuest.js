@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { withNavigation } from "react-navigation";
-
+//pagina para usuarios no registrados
 function UserGuest(props) {
   const { navigation } = props;
 

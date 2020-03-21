@@ -9,6 +9,7 @@ export default function AddMedicos(props) {
   const { setIsReloadMedicosServ } = navigation.state.params;
   const toastRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
+
   return (
     <View>
       <AddMedicosForm

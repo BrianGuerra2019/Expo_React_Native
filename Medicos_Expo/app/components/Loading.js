@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import { Overlay } from "react-native-elements";
-
+//Vista de animacion de cargando
 export default function Loading(props) {
   const { isVisible, text } = props;
   return (
@@ -9,10 +9,10 @@ export default function Loading(props) {
       isVisible={isVisible}
       windowBackgroundColor="rgba(0,0,0,.5)"
       overlayBackgroundColor="transparent"
-      overlayStyle={StyleSheet.Overlay}
+      overlayStyle={styles.Overlay}
     >
       <View style={styles.view}>
-        <ActivityIndicator size="large" color="#00a680" />
+        <ActivityIndicator size="large" color="#309ccb" />
         {text && <Text style={styles.text}>{text}</Text>}
       </View>
     </Overlay>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 200,
     backgroundColor: "#fff",
-    borderColor: "#00a680",
+    borderColor: "#309ccb",
     borderWidth: 2,
     borderRadius: 10
   },
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   text: {
-    color: "#00a680",
+    color: "#309ccb",
     textTransform: "uppercase",
     marginTop: 10
   }

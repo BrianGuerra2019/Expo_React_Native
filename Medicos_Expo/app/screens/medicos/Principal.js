@@ -8,7 +8,7 @@ import { firebaseApp } from "../../utils/Firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 const db = firebase.firestore(firebaseApp);
-
+//vista que carga todos los servicios existentes
 export default function Principal(props) {
   const { navigation } = props;
   const [user, setUser] = useState(null);
@@ -19,7 +19,7 @@ export default function Principal(props) {
   const [isReloadMedicosServ, setIsReloadMedicosServ] = useState(false);
   const limitMedicosServ = 12;
 
-  console.log(medicosServ);
+  //console.log(medicosServ);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(userInfo => {
@@ -75,7 +75,7 @@ export default function Principal(props) {
         servMedico.id = doc.id;
         resultMedicosServ.push({ servMedico });
       });
-      setMedicosServ([...servMedico, ...resultMedicosServ]);
+      setMedicosServ([...medicosServ, ...resultMedicosServ]);
     });
   };
 

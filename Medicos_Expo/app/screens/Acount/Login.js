@@ -5,7 +5,7 @@ import LoginForm from "../../components/Account/LoginForm";
 import Toast from "react-native-easy-toast";
 import LoginFacebook from "../../components/Account/LoginFacebook";
 import LoginGoogle from "../../components/Account/LoginGoogle";
-
+//pagina de loggin
 export default function Login(props) {
   const { navigation } = props;
   const toastRef = useRef();
