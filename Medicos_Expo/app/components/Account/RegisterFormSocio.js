@@ -131,6 +131,6 @@ const styles = StyleSheet.create({
     width: "95%"
   },
   btnRegister: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#3377FF"
   }
 });

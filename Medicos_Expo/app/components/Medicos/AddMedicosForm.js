@@ -237,7 +237,7 @@ function FormAdd(props) {
         rightIcon={{
           type: "material-community",
           name: "google-maps",
-          color: locationMedico ? "#00a680" : "#c2c2c2",
+          color: locationMedico ? "#3377FF" : "#c2c2c2",
           onPress: () => setIsVisibleMap(true)
         }}
         onChange={e => setMedicoAdress(e.nativeEvent.text)}
@@ -370,7 +370,7 @@ const styles = StyleSheet.create({
     paddingRight: 5
   },
   viewMapBtnSave: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#3377FF"
   },
   viewMapBtnContainerCancel: {
     paddingLeft: 5
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#a60d0d"
   },
   btnAddMedicos: {
-    backgroundColor: "#00a680",
+    backgroundColor: "#3377FF",
     margin: 20
   }
 });

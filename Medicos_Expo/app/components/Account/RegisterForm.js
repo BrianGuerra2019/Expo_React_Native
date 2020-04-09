@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
 import { validateEmail } from "../../utils/Validation";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
 import { withNavigation } from "react-navigation";
 import Loading from "../Loading";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 //Pagina de los campos para el registro de usuarios
 function RegisterForm(props) {
   const { toastRef, navigation } = props;
@@ -26,15 +32,48 @@ function RegisterForm(props) {
         if (password !== repeatPassword) {
           toastRef.current.show("Contrasenas no coinsiden");
         } else {
+          console.log("entro");
           await firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(() => {
-              navigation.navigate("MyAccount");
+            .then(user => {
+              db.collection("usuarios")
+                .doc(user.uid)
+                .add({
+                  name: user.userName,
+                  lastname: user.userLastName,
+                  motherlastname: user.userMotherLastName,
+                  avatarUser: user.photoURL,
+                  email: user.userEmail,
+                  password: user.userPassword,
+                  address: user.userAdress,
+                  telephone: user.userNumerTel,
+                  cellular: user.userNuerCel,
+                  dateofbirth: user.userDateofBirth,
+                  postalcode: user.userPostalCode,
+                  city: user.userCity,
+                  state: user.unserState,
+                  curp: user.userCurp,
+                  gender: user.userGender,
+                  tipy: user.type,
+                  createAt: new Date()
+                })
+                .then(() => {
+                  console.log("entro 2");
+                  navigation.navigate("MyAccount");
+                })
+                .catch(() => {
+                  // toastRef.current.show(
+                  //   "Error al crear la cuenta, intentalo mas tarde"
+                  // );
+                  console.log("error");
+                });
+              // navigation.navigate("MyAccount");
             })
             .catch(() => {
               toastRef.current.show(
-                "Error al crear la cuenta, intentalo mas tarde"
+                "Error al crear la cuenta, intentalo mas tarde",
+                300
               );
             });
         }
@@ -119,6 +158,6 @@ const styles = StyleSheet.create({
     width: "95%"
   },
   btnRegister: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#3377FF"
   }
 });

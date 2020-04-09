@@ -101,7 +101,7 @@ function AddMedicosButton(props) {
   const { navigation, setIsReloadMedicosServ } = props;
   return (
     <ActionButton
-      buttonColor="#00a680"
+      buttonColor="#3377FF"
       onPress={() =>
         navigation.navigate("AddMedicos", { setIsReloadMedicosServ })
       }

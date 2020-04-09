@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   btnRegister: {
-    color: "#00a680",
+    color: "#3377FF",
     fontWeight: "bold"
   },
   Divider: {
-    backgroundColor: "#00a680",
+    backgroundColor: "#3377FF",
     margin: 40
   }
 });

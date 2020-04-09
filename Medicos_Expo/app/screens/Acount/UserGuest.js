@@ -1,20 +1,32 @@
-import React from "react";
-import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Image,
+  FlatList
+} from "react-native";
 import { Button } from "react-native-elements";
 import { withNavigation } from "react-navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
 //pagina para usuarios no registrados
 function UserGuest(props) {
   const { navigation } = props;
 
   return (
-    <ScrollView style={styles.viewBody} centerContent={true}>
+    <ScrollView style={styles.viewBody}>
       <Image
         source={require("../../../assets/logo4.png")}
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text> Consulta tu perfil de servicios medicos</Text>
-      <Text style={styles.description}>Que servicio medico necesitas? </Text>
+      <Text>
+        La aplicacion de servicios medicos ayuda a las personas a contratar un
+        servicio en especifico deacuerdo a sus necesidades medias, desde una
+        revicion de rutina a domicilio, hasta cuidados especiales en su casa.
+      </Text>
+
       <View style={styles.viewBtn}>
         <Button
           buttonStyle={styles.btnStyles}
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "100%",
-    height: 500,
+    height: 350,
     marginTop: 20
   },
   title: {
@@ -54,9 +66,15 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   btnStyles: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#3377FF"
   },
   btnContainer: {
     width: "70%"
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 40,
+    paddingHorizontal: 20
   }
 });

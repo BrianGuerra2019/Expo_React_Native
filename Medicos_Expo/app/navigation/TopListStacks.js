@@ -5,7 +5,7 @@ export const TopListScreenStacks = createStackNavigator({
   TopMedicos: {
     screen: TopMedicosScreen,
     navigationOptions: () => ({
-      title: "Los mejores Medicos"
+      title: "Los mejores Servicios"
     })
   }
 });

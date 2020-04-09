@@ -3,32 +3,32 @@ import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
-export default function ChangeDisplayNameForm(props) {
-  const { displayName, setIsVisibleModal, setReloadData, toastRef } = props;
-  const [newDisplayName, setNewDisplayName] = useState(null);
+export default function ChangeDisplayNameAppForm(props) {
+  const { displayNameApp, setIsVisibleModal, setReloadData, toastRef } = props;
+  const [newDisplayNameApp, setNewDisplayNameApp] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const updateDisplayName = () => {
+  const updateDisplayNameApp = () => {
     setError(null);
-    if (!newDisplayName) {
-      setError("El nobre de usuario no ha cambiado.");
+    if (!newDisplayNameApp) {
+      setError("El Apellodo paterno de usuario no ha cambiado.");
     } else {
       setIsLoading(true);
       const update = {
-        displayName: newDisplayName
+        displayNameApp: newDisplayNameApp
       };
       firebase
         .auth()
-        .currentUser.updateProfile(update)
+        .currentUser.updateDisplayNameApp(update)
         .then(() => {
           setIsLoading(false);
           setReloadData(true);
-          toastRef.current.show("Nombre Actualizado correctamente");
+          toastRef.current.show("Apellido Paterno Actualizado correctamente");
           setIsVisibleModal(false);
         })
         .catch(() => {
-          setError("Error al actualizar el nombre.");
+          setError("Error al actualizar el apellido.");
           setIsLoading(false);
         });
     }
@@ -36,10 +36,10 @@ export default function ChangeDisplayNameForm(props) {
   return (
     <View style={styles.view}>
       <Input
-        placeholder="Nombre"
+        placeholder="Apellido paterno"
         containerStyle={styles.input}
-        defaultValue={displayName && displayName}
-        onChange={e => setNewDisplayName(e.nativeEvent.text)}
+        defaultValue={displayNameApp && displayNameApp}
+        onChange={e => setNewDisplayNameApp(e.nativeEvent.text)}
         rightIcon={{
           type: "material-community",
           name: "account-circle-outline",
@@ -48,10 +48,10 @@ export default function ChangeDisplayNameForm(props) {
         errorMessage={error}
       />
       <Button
-        title="Cabiar nombre"
+        title="Cabiar Apellido"
         containerStyle={styles.btnContainer}
         buttonStyle={styles.btn}
-        onPress={updateDisplayName}
+        onPress={updateDisplayNameApp}
         loading={isLoading}
       />
     </View>

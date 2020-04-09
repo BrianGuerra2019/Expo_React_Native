@@ -74,7 +74,7 @@ export default function Servicio(props) {
           }
         });
     }
-  }, []);
+  }, [userLogged]);
 
   const addFavorite = () => {
     if (!userLogged) {

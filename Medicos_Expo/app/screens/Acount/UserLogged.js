@@ -29,17 +29,18 @@ export default function UserLogged() {
         setIsLoading={setIsLoading}
         setTextLoading={setTextLoading}
       />
-      <AccountOptions
-        userInfo={userInfo}
-        setReloadData={setReloadData}
-        toastRef={toastRef}
-      />
       <Button
         title="Cerrar sesion"
         buttonStyle={styles.btnCloseSession}
         titleStyle={styles.btnCloseSessionText}
         onPress={() => firebase.auth().signOut()}
       />
+      <AccountOptions
+        userInfo={userInfo}
+        setReloadData={setReloadData}
+        toastRef={toastRef}
+      />
+
       <Loading text={textLoading} isVisible={isLoading} />
       <Toast ref={toastRef} position="center" opacity={0.5} />
     </View>
@@ -49,10 +50,12 @@ export default function UserLogged() {
 const styles = StyleSheet.create({
   viewUserInfo: {
     minHeight: "100%",
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#f2f2f2",
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   btnCloseSession: {
-    marginTop: 30,
+    marginTop: 0,
     borderRadius: 0,
     backgroundColor: "#fff",
     borderTopWidth: 1,
@@ -60,9 +63,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#e3e3e3",
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   btnCloseSessionText: {
-    color: "#00a680"
-  }
+    color: "#3377FF",
+  },
 });

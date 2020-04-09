@@ -56,7 +56,7 @@ export default function Favorites(props) {
         });
     }
     setReloadServicios(false);
-  }, [reloadServicios]);
+  }, [userLogged]);
 
   const getDataServicios = idServArray => {
     const arrayServicios = [];
@@ -122,7 +122,7 @@ function FavoritoServ(props) {
   const { id, name, images } = servicioFavorito.item;
   const [imageServicio, setImageServicio] = useState(null);
   //console.log("Favorito");
-  //console.log(servicioFavorito.item);
+  //console.log(servicioFavorito);
   useEffect(() => {
     const image = images[0];
     firebase
@@ -199,7 +199,7 @@ function FavoritoServ(props) {
         <Icon
           type="material-community"
           name="heart"
-          color="#00a680"
+          color="#3377FF"
           containerStyle={styles.favorite}
           onPress={confirmRemoveFavorite}
           size={40}
@@ -237,7 +237,7 @@ function UserNoLogged(props) {
         title="Ir al login"
         onPress={() => navigation.navigate("Login")}
         containerStyle={{ marginTop: 20, width: "80%" }}
-        buttonStyle={{ backgroundColor: "#00a680" }}
+        buttonStyle={{ backgroundColor: "#3377FF" }}
       />
     </View>
   );
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   image: {
-    width: "100%",
+    width: 394,
     height: 180
   },
   info: {

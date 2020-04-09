@@ -29,9 +29,9 @@ export default function CarouselImages(props) {
 
 const styles = StyleSheet.create({
   indicator: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#3377FF"
   },
   indicatorActive: {
-    backgroundColor: "#00ffc5"
+    backgroundColor: "#3377FF"
   }
 });
