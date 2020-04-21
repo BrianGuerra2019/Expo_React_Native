@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 
 export default function ChangeDisplayAddressForm(props) {
-  const { displayAddress, setIsVisibleModal, setReloadData, toastRef } = props;
+  const {
+    displayAddress,
+    setIsVisibleModal,
+    setReloadData,
+    toastRef,
+    user2,
+  } = props;
   const [newDisplayAddress, setNewDisplayAddress] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const updateDisplayAddress = () => {
     setError(null);
-    if (!newDisplayNameApp) {
+    if (!newDisplayAddress) {
       setError("La direccion de usuario no ha cambiado.");
     } else {
       setIsLoading(true);
       const update = {
         displayAddress: newDisplayAddress,
       };
-      firebase
-        .auth()
-        .currentUser.updateDisplayAddress(update)
+      // firebase
+      //   .auth()
+      //   .currentUser.updateDisplayAddress(update)
+      //   .then(() => {
+      db.collection("usuarios")
+        .doc(user2)
+        .update({ address: newDisplayAddress })
         .then(() => {
           setIsLoading(false);
           setReloadData(true);

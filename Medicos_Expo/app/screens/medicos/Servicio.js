@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions, Button } from "react-native";
 import { Rating, ListItem, Icon } from "react-native-elements";
 import Carousel from "../../components/Carrousel";
 import { ScrollView } from "react-native-gesture-handler";
@@ -8,7 +8,7 @@ import ListReviews from "../../components/Medicos/ListReviews";
 import Toast from "react-native-easy-toast";
 import { YellowBox } from "react-native";
 YellowBox.ignoreWarnings([
-  "VirtualizedLists should never be nested" // TODO: Remove when fixed
+  "VirtualizedLists should never be nested", // TODO: Remove when fixed
 ]);
 
 import { firebaseApp } from "../../utils/Firebase";
@@ -36,7 +36,7 @@ export default function Servicio(props) {
   const toastRef = useRef();
   //console.log(servMedico.id);
   //console.log(firebase.auth().currentUser.uid);
-  firebase.auth().onAuthStateChanged(user => {
+  firebase.auth().onAuthStateChanged((user) => {
     user ? setUserLogged(true) : setUserLogged(false);
   });
 
@@ -44,12 +44,12 @@ export default function Servicio(props) {
     const arrayUrls = [];
     (async () => {
       await Promise.all(
-        medicosSe.images.map(async idImage => {
+        medicosSe.images.map(async (idImage) => {
           await firebase
             .storage()
             .ref(`servicios-imagenes/${idImage}`)
             .getDownloadURL()
-            .then(imageUrl => {
+            .then((imageUrl) => {
               arrayUrls.push(imageUrl);
             });
         })
@@ -65,7 +65,7 @@ export default function Servicio(props) {
         .where("idServicio", "==", medicosSe.id)
         .where("idUser", "==", firebase.auth().currentUser.uid)
         .get()
-        .then(response => {
+        .then((response) => {
           //console.log(response.docs.length);
           if (response.docs.length === 1) {
             setIsFavorite(true);
@@ -85,7 +85,7 @@ export default function Servicio(props) {
     } else {
       const payload = {
         idUser: firebase.auth().currentUser.uid,
-        idServicio: medicosSe.id
+        idServicio: medicosSe.id,
       };
 
       db.collection("favorites")
@@ -107,8 +107,8 @@ export default function Servicio(props) {
       .where("idServicio", "==", medicosSe.id)
       .where("idUser", "==", firebase.auth().currentUser.uid)
       .get()
-      .then(response => {
-        response.forEach(doc => {
+      .then((response) => {
+        response.forEach((doc) => {
           const idFavorite = doc.id;
           db.collection("favorites")
             .doc(idFavorite)
@@ -151,6 +151,12 @@ export default function Servicio(props) {
         name={medicosSe.name}
         address={medicosSe.address}
       ></ServicioInfo>
+      <Button
+        title="Enviar Mensaje"
+        containerStyle={styles.btnContainerRegister}
+        buttonStyle={styles.btnRegister}
+        onPress={console.log("mensaje")}
+      />
       <ListReviews
         navigation={navigation}
         idServicio={medicosSe.id}
@@ -172,27 +178,33 @@ function ServicioInfo(props) {
       text: address,
       iconName: "map-marker",
       iconType: "material-community",
-      action: null
+      action: null,
     },
     {
       //si se necesita mas informacion de mostrar
       text: " 4492785445", //campo telefono
       iconName: "phone",
       iconType: "material-community",
-      action: null
+      action: null,
     },
     {
       text: "xAgustin93@gmail.com",
       iconName: "at",
       iconType: "material-community",
-      action: null
-    }
+      action: null,
+    },
   ];
 
   return (
     <View style={styles.viewServicioInfo}>
       <Text style={styles.ServicioInfoTitle}>Inforacion del servicio</Text>
       <Map location={location} name={name} height={100}></Map>
+      {/* <Button
+        title="Enviar Mensaje"
+        containerStyle={styles.btnContainerRegister}
+        buttonStyle={styles.btnRegister}
+        onPress={console.log("mensaje")}
+      /> */}
       {listInfo.map((item, index) => (
         <ListItem
           key={index}
@@ -200,7 +212,7 @@ function ServicioInfo(props) {
           leftIcon={{
             name: item.iconName,
             type: item.iconType,
-            color: "#309ccb"
+            color: "#309ccb",
           }}
           containerStyle={styles.containerListItem}
         />
@@ -232,35 +244,35 @@ function TitleServicio(props) {
 
 const styles = StyleSheet.create({
   viewBody: {
-    flex: 1
+    flex: 1,
   },
   viewServicioTitle: {
-    margin: 15
+    margin: 15,
   },
   nameServicio: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   rating: {
     position: "absolute",
-    right: 0
+    right: 0,
   },
   descriptionServicio: {
     marginTop: 5,
-    color: "grey"
+    color: "grey",
   },
   viewServicioInfo: {
     margin: 15,
-    marginTop: 25
+    marginTop: 25,
   },
   ServicioInfoTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10
+    marginBottom: 10,
   },
   containerListItem: {
     borderBottomColor: "#d8d8d8",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   viewFavorite: {
     position: "absolute",
@@ -271,6 +283,13 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 100,
     paddingTop: 5,
     paddingLeft: 15,
-    paddingRight: 5
-  }
+    paddingRight: 5,
+  },
+  btnContainerRegister: {
+    marginTop: 20,
+    width: "95%",
+  },
+  btnRegister: {
+    backgroundColor: "#3377FF",
+  },
 });

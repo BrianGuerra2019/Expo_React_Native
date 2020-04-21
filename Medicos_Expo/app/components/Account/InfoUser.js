@@ -12,10 +12,10 @@ export default function InfoUser(props) {
     setReloadData,
     toastRef,
     setIsLoading,
-    setTextLoading
+    setTextLoading,
   } = props;
   //console.log(userInfo);
-
+  //console.log(props);
   const changeAvatar = async () => {
     const resultPermision = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     const resultPermisionCamera = resultPermision.permissions.cameraRoll.status;
@@ -25,7 +25,7 @@ export default function InfoUser(props) {
     } else {
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        aspect: [4, 3]
+        aspect: [4, 3],
       });
       if (result.cancelled) {
         toastRef.current.show("Has cerrado la galeria de imagenes.");
@@ -41,20 +41,17 @@ export default function InfoUser(props) {
     setIsLoading(true);
     const response = await fetch(uri);
     const blob = await response.blob();
-    const ref = firebase
-      .storage()
-      .ref()
-      .child(`avatar/${nameImage}`);
+    const ref = firebase.storage().ref().child(`avatar/${nameImage}`);
     return ref.put(blob);
   };
-  const updatePhotoUrl = uid => {
+  const updatePhotoUrl = (uid) => {
     firebase
       .storage()
       .ref(`avatar/${uid}`)
       .getDownloadURL()
-      .then(async result => {
+      .then(async (result) => {
         const update = {
-          photoURL: result
+          photoURL: result,
         };
         await firebase.auth().currentUser.updateProfile(update);
         setReloadData(true);
@@ -71,18 +68,19 @@ export default function InfoUser(props) {
         size="large"
         showEditButton
         onEditPress={changeAvatar}
-        containerStyle={StyleSheet.userInfoAvatar}
+        containerStyle={styles.userInfoAvatar}
         source={{
           uri: photoURL
             ? photoURL
-            : "https://api.adorable.io/avatars/223/abott@adorable.pngCopy"
+            : "https://api.adorable.io/avatars/223/abott@adorable.pngCopy",
         }}
       />
       <View>
-        <Text style={StyleSheet.displayName}>
+        <Text style={styles.displayName}>
           {displayName ? displayName : "Anonimo"}
         </Text>
         <Text>{email ? email : "Social Login"}</Text>
+        <Text>Paquete Gratis</Text>
       </View>
     </View>
   );
@@ -94,12 +92,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#f2f2f2",
     paddingTop: 30,
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   userInfoAvatar: {
-    marginRight: 20
+    marginRight: 20,
   },
   displayName: {
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

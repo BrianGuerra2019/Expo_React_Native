@@ -7,10 +7,22 @@ import { withNavigation } from "react-navigation";
 import Loading from "../Loading";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
+// import { firebaseApp } from "../../utils/Firebase";
+// import firebase from "firebase/app";
+// import "firebase/firestore";
+// const db = firebase.firestore(firebaseApp);
+
 import { firebaseApp } from "../../utils/Firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 const db = firebase.firestore(firebaseApp);
+
+//import { ReactNativeFirebase } from '@react-native-firebase/app';
+//import { firebase } from '@react-native-firebase/auth';
+//import auth from '@react-native-firebase/auth';
+//import firebase from '@react-native-firebase/app';
+//import '@react-native-firebase/auth';
+
 //Pagina de los campos para el registro de usuarios
 function RegisterForm(props) {
   const { toastRef, navigation } = props;
@@ -32,49 +44,54 @@ function RegisterForm(props) {
         if (password !== repeatPassword) {
           toastRef.current.show("Contrasenas no coinsiden");
         } else {
-          console.log("entro");
+          //console.log("entro");
           await firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(user => {
+            .then((user) => {
+              //console.log("cuenta");
+              //console.log(user);
+              //const { ID } = user.uid;
+              // console.log("ID");
+              // console.log(ID);
               db.collection("usuarios")
-                .doc(user.uid)
-                .add({
-                  name: user.userName,
-                  lastname: user.userLastName,
-                  motherlastname: user.userMotherLastName,
-                  avatarUser: user.photoURL,
-                  email: user.userEmail,
-                  password: user.userPassword,
-                  address: user.userAdress,
-                  telephone: user.userNumerTel,
-                  cellular: user.userNuerCel,
-                  dateofbirth: user.userDateofBirth,
-                  postalcode: user.userPostalCode,
-                  city: user.userCity,
-                  state: user.unserState,
-                  curp: user.userCurp,
-                  gender: user.userGender,
-                  tipy: user.type,
-                  createAt: new Date()
+                .doc(user.user.uid)
+                .set({
+                  idUsuario: user.user.uid,
+                  name: "",
+                  lastname: "",
+                  motherlastname: "",
+                  avatarUser: "",
+                  email: email,
+                  password: password,
+                  address: "",
+                  telephone: "",
+                  cellular: "",
+                  dateofbirth: "",
+                  postalcode: "",
+                  city: "",
+                  state: "",
+                  curp: "",
+                  gender: "",
+                  type: "",
+                  package: "",
+                  createAt: new Date(),
                 })
                 .then(() => {
-                  console.log("entro 2");
+                  console.log("TODO OK");
                   navigation.navigate("MyAccount");
                 })
-                .catch(() => {
-                  // toastRef.current.show(
-                  //   "Error al crear la cuenta, intentalo mas tarde"
-                  // );
-                  console.log("error");
+                .catch((error) => {
+                  console.log(error);
                 });
-              // navigation.navigate("MyAccount");
+              //navigation.navigate("MyAccount");
             })
-            .catch(() => {
+            .catch((err) => {
               toastRef.current.show(
                 "Error al crear la cuenta, intentalo mas tarde",
-                300
+                500
               );
+              console.log(err);
             });
         }
       }
@@ -87,7 +104,7 @@ function RegisterForm(props) {
       <Input
         placeholder="Correo electronico"
         containerStyle={styles.inputForm}
-        onChange={e => setEmail(e.nativeEvent.text)}
+        onChange={(e) => setEmail(e.nativeEvent.text)}
         rightIcon={
           <Icon
             type="material-community"
@@ -101,7 +118,7 @@ function RegisterForm(props) {
         pasword={true}
         secureTextEntry={hidePassword}
         containerStyle={styles.inputForm}
-        onChange={e => setPassword(e.nativeEvent.text)}
+        onChange={(e) => setPassword(e.nativeEvent.text)}
         rightIcon={
           <Icon
             type="material-community"
@@ -116,7 +133,7 @@ function RegisterForm(props) {
         pasword={true}
         secureTextEntry={hideRepeatPassword}
         containerStyle={styles.inputForm}
-        onChange={e => setRepeatPassword(e.nativeEvent.text)}
+        onChange={(e) => setRepeatPassword(e.nativeEvent.text)}
         rightIcon={
           <Icon
             type="material-community"
@@ -144,20 +161,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30
+    marginTop: 30,
   },
   inputForm: {
     width: "100%",
-    marginTop: 20
+    marginTop: 20,
   },
   iconRight: {
-    color: "#c1c1c1"
+    color: "#c1c1c1",
   },
   btnContainerRegister: {
     marginTop: 20,
-    width: "95%"
+    width: "95%",
   },
   btnRegister: {
-    backgroundColor: "#3377FF"
-  }
+    backgroundColor: "#3377FF",
+  },
 });

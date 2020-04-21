@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 
 export default function ChangeDisplayNameApmForm(props) {
-  const { displayNameApm, setIsVisibleModal, setReloadData, toastRef } = props;
+  const {
+    displayNameApm,
+    setIsVisibleModal,
+    setReloadData,
+    toastRef,
+    user2,
+  } = props;
   const [newDisplayNameApm, setNewDisplayNameApm] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,9 +28,13 @@ export default function ChangeDisplayNameApmForm(props) {
       const update = {
         displayNameApm: newDisplayNameApm,
       };
-      firebase
-        .auth()
-        .currentUser.updateDisplayNameApm(update)
+      // firebase
+      //   .auth()
+      //   .currentUser.updateDisplayNameApm(update)
+      //   .then(() => {
+      db.collection("usuarios")
+        .doc(user2)
+        .update({ motherlastname: newDisplayNameApm })
         .then(() => {
           setIsLoading(false);
           setReloadData(true);

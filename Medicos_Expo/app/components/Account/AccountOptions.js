@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import { ListItem, Icon } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 import Modal from "../Modal";
 import ChangeDisplayNameForm from "./ChangeDisplayNameForm";
 import ChangeDisplayNameAppForm from "./ChangeDisplayNameAppForm";
@@ -15,12 +15,14 @@ import ChangeDisplayTelForm from "./ChangeDisplayTelForm";
 import ChangeGenderForm from "./ChangeGenderForm";
 import ChangeStateForm from "./ChangeStateForm";
 import ChangeEmailForm from "./ChangeEmailForm";
+import ChangeSubscriptionForm from "./ChangeSubscriptionForm";
 import ChangePasswordForm from "./ChangePasswordForm";
 
 export default function AccountOptions(props) {
-  const { userInfo, setReloadData, toastRef } = props;
+  const { userInfo, setReloadData, toastRef, user2 } = props;
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [renderCoponent, setRenderCoponent] = useState(null);
+  //console.log(user2);
   const menuOptions = [
     {
       title: "Suscripcion",
@@ -157,33 +159,6 @@ export default function AccountOptions(props) {
       iconColorLeft: "#ccc",
       onPress: () => selectedCoponent("Gender"),
     },
-    {
-      title: "",
-      iconType: "material-community",
-      iconNameLeft: "",
-      iconColorLeft: "#ccc",
-      iconNameRight: "chevron-right",
-      iconColorLeft: "#ccc",
-      onPress: () => selectedCoponent("displayName"),
-    },
-    {
-      title: "",
-      iconType: "material-community",
-      iconNameLeft: "",
-      iconColorLeft: "#ccc",
-      iconNameRight: "chevron-right",
-      iconColorLeft: "#ccc",
-      onPress: () => selectedCoponent(""),
-    },
-    {
-      title: "",
-      iconType: "material-community",
-      iconNameLeft: "",
-      iconColorLeft: "#ccc",
-      iconNameRight: "chevron-right",
-      iconColorLeft: "#ccc",
-      onPress: () => selectedCoponent(""),
-    },
   ];
 
   const selectedCoponent = (key) => {
@@ -195,6 +170,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -206,6 +182,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -217,6 +194,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -228,6 +206,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -239,6 +218,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -248,6 +228,7 @@ export default function AccountOptions(props) {
           <ChangePasswordForm
             setIsVisibleModal={setIsVisibleModal}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -259,6 +240,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -270,6 +252,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -281,6 +264,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -292,6 +276,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -303,6 +288,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -314,6 +300,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -325,6 +312,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -336,6 +324,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -347,6 +336,7 @@ export default function AccountOptions(props) {
             setIsVisibleModal={setIsVisibleModal}
             setReloadData={setReloadData}
             toastRef={toastRef}
+            user2={user2}
           />
         );
         setIsVisibleModal(true);
@@ -356,7 +346,7 @@ export default function AccountOptions(props) {
     }
   };
   return (
-    <ScrollView>
+    <ScrollView style={styles.tipo}>
       {menuOptions.map((menu, index) => (
         <ListItem
           key={index}
@@ -388,5 +378,8 @@ const styles = StyleSheet.create({
   menuItem: {
     borderBottomWidth: 1,
     borderBottomColor: "#e3e3e3",
+  },
+  tipo: {
+    flex: 1,
   },
 });

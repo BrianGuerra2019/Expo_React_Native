@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 
 export default function ChangeCurpForm(props) {
-  const { curp, setIsVisibleModal, setReloadData, toastRef } = props;
+  const { curp, setIsVisibleModal, setReloadData, toastRef, user2 } = props;
   const [newCurp, setNewCurp] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,19 +22,34 @@ export default function ChangeCurpForm(props) {
       const update = {
         curp: newCurp,
       };
-      firebase
-        .auth()
-        .currentUser.updateCurp(update)
+      // firebase
+      //   .auth()
+      //   .currentUser.updateCurp(update)
+      //   .then(() => {
+      db.collection("usuarios")
+        .doc(user2)
+        .update({ curp: newCurp })
         .then(() => {
+          console.log("TODO OK");
           setIsLoading(false);
           setReloadData(true);
           toastRef.current.show("Curp Actualizado correctamente");
           setIsVisibleModal(false);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           setError("Error al actualizar la curp.");
           setIsLoading(false);
         });
+      // setIsLoading(false);
+      // setReloadData(true);
+      // toastRef.current.show("Curp Actualizado correctamente");
+      // setIsVisibleModal(false);
+      // })
+      // .catch(() => {
+      //   setError("Error al actualizar la curp.");
+      //   setIsLoading(false);
+      // });
     }
   };
   return (

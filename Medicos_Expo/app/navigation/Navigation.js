@@ -6,6 +6,7 @@ import PrincipalScreenStacks from "./MedicosStacks";
 import TopListScreenStacks from "./TopListStacks";
 import SearchScreenStacks from "./SearchStacks";
 import AccountScreenStacks from "./AccountStacks";
+import ChatScreenStacks from "./ChatStacks";
 // import SplashScreen from "../screens/SplashScreen";
 import FavoritesScreenStacks from "./FavoritesStacks";
 //importar las vistas que se necesitan en la pantalla
@@ -29,8 +30,8 @@ const NavigationStacks = createBottomTabNavigator(
             size={22}
             color={tintColor}
           />
-        )
-      })
+        ),
+      }),
     },
     TopLists: {
       screen: TopListScreenStacks,
@@ -43,8 +44,8 @@ const NavigationStacks = createBottomTabNavigator(
             size={22}
             color={tintColor}
           />
-        )
-      })
+        ),
+      }),
     },
     Favorites: {
       screen: FavoritesScreenStacks,
@@ -57,8 +58,8 @@ const NavigationStacks = createBottomTabNavigator(
             size={22}
             color={tintColor}
           />
-        )
-      })
+        ),
+      }),
     },
     Search: {
       screen: SearchScreenStacks,
@@ -71,8 +72,22 @@ const NavigationStacks = createBottomTabNavigator(
             size={22}
             color={tintColor}
           />
-        )
-      })
+        ),
+      }),
+    },
+    Chat: {
+      screen: ChatScreenStacks,
+      navigationOptions: () => ({
+        tabBarLabel: "Chat",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            type="material-community"
+            name="message"
+            size={22}
+            color={tintColor}
+          />
+        ),
+      }),
     },
     Account: {
       screen: AccountScreenStacks,
@@ -85,17 +100,17 @@ const NavigationStacks = createBottomTabNavigator(
             size={22}
             color={tintColor}
           />
-        )
-      })
-    }
+        ),
+      }),
+    },
   },
   {
     initialRouteName: "Principal",
-    order: ["Principal", "TopLists", "Favorites", "Search", "Account"],
+    order: ["Principal", "TopLists", "Favorites", "Search", "Chat", "Account"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
-      activeTintColor: "#3377FF"
-    }
+      activeTintColor: "#3377FF",
+    },
   }
 );
 

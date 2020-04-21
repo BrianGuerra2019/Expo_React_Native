@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 
 export default function ChangeDisplayCodePostalForm(props) {
   const {
@@ -9,6 +13,7 @@ export default function ChangeDisplayCodePostalForm(props) {
     setIsVisibleModal,
     setReloadData,
     toastRef,
+    user2,
   } = props;
   const [newDisplayCodePostal, setNewDisplayCodePostal] = useState(null);
   const [error, setError] = useState(null);
@@ -23,9 +28,13 @@ export default function ChangeDisplayCodePostalForm(props) {
       const update = {
         displayCodePostal: newDisplayCodePostal,
       };
-      firebase
-        .auth()
-        .currentUser.updateDisplayCodePostal(update)
+      // firebase
+      //   .auth()
+      //   .currentUser.updateDisplayCodePostal(update)
+      //   .then(() => {
+      db.collection("usuarios")
+        .doc(user2)
+        .update({ postalcode: newDisplayCodePostal })
         .then(() => {
           setIsLoading(false);
           setReloadData(true);

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
 import { Divider } from "react-native-elements";
 import LoginForm from "../../components/Account/LoginForm";
@@ -7,8 +7,12 @@ import LoginFacebook from "../../components/Account/LoginFacebook";
 import LoginGoogle from "../../components/Account/LoginGoogle";
 //pagina de loggin
 export default function Login(props) {
-  const { navigation } = props;
+  const { navigation, Paquete1, Paquete2, Paquete3 } = props;
   const toastRef = useRef();
+  console.log(Paquete1);
+  console.log(Paquete2);
+  console.log(Paquete3);
+
   return (
     <ScrollView>
       <Image
@@ -61,23 +65,23 @@ const styles = StyleSheet.create({
   logo: {
     width: "100%",
     height: 150,
-    marginTop: 20
+    marginTop: 20,
   },
   viewContainer: {
     marginRight: 40,
-    marginLeft: 40
+    marginLeft: 40,
   },
   textRegister: {
     marginTop: 15,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   btnRegister: {
     color: "#3377FF",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   Divider: {
     backgroundColor: "#3377FF",
-    margin: 40
-  }
+    margin: 40,
+  },
 });

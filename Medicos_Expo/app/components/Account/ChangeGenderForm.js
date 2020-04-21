@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
+import { firebaseApp } from "../../utils/Firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+const db = firebase.firestore(firebaseApp);
 
 export default function ChangeGenderForm(props) {
-  const { gender, setIsVisibleModal, setReloadData, toastRef } = props;
+  const { gender, setIsVisibleModal, setReloadData, toastRef, user2 } = props;
   const [newGender, setNewGender] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,9 +22,13 @@ export default function ChangeGenderForm(props) {
       const update = {
         gender: newGender,
       };
-      firebase
-        .auth()
-        .currentUser.updateGender(update)
+      // firebase
+      //   .auth()
+      //   .currentUser.updateGender(update)
+      //   .then(() => {
+      db.collection("usuarios")
+        .doc(user2)
+        .update({ gender: newGender })
         .then(() => {
           setIsLoading(false);
           setReloadData(true);

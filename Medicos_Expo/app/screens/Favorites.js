@@ -6,7 +6,7 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import { Image, Icon, Button } from "react-native-elements";
 import Loading from "../components/Loading";
@@ -28,7 +28,7 @@ export default function Favorites(props) {
 
   //console.log(servicioFavorito);
 
-  firebase.auth().onAuthStateChanged(user => {
+  firebase.auth().onAuthStateChanged((user) => {
     user ? setUserLogged(true) : setUserLogged(false);
   });
 
@@ -38,15 +38,15 @@ export default function Favorites(props) {
       db.collection("favorites")
         .where("idUser", "==", idUser)
         .get()
-        .then(response => {
+        .then((response) => {
           const idServArray = [];
-          response.forEach(doc => {
+          response.forEach((doc) => {
             idServArray.push(doc.data().idServicio);
           });
 
-          getDataServicios(idServArray).then(response => {
+          getDataServicios(idServArray).then((response) => {
             const servicioFavorito = [];
-            response.forEach(doc => {
+            response.forEach((doc) => {
               let servFavorito = doc.data();
               servFavorito.id = doc.id;
               servicioFavorito.push(servFavorito);
@@ -58,13 +58,10 @@ export default function Favorites(props) {
     setReloadServicios(false);
   }, [userLogged]);
 
-  const getDataServicios = idServArray => {
+  const getDataServicios = (idServArray) => {
     const arrayServicios = [];
-    idServArray.forEach(idServicio => {
-      const result = db
-        .collection("servicios")
-        .doc(idServicio)
-        .get();
+    idServArray.forEach((idServicio) => {
+      const result = db.collection("servicios").doc(idServicio).get();
       arrayServicios.push(result);
     });
     return Promise.all(arrayServicios);
@@ -88,7 +85,7 @@ export default function Favorites(props) {
       {servicioFavorito ? (
         <FlatList
           data={servicioFavorito}
-          renderItem={servicioFavorito => (
+          renderItem={(servicioFavorito) => (
             <FavoritoServ
               servicioFavorito={servicioFavorito}
               navigation={navigation}
@@ -117,7 +114,7 @@ function FavoritoServ(props) {
     navigation,
     setIsVisibleLoading,
     setReloadServicios,
-    toastRef
+    toastRef,
   } = props;
   const { id, name, images } = servicioFavorito.item;
   const [imageServicio, setImageServicio] = useState(null);
@@ -129,7 +126,7 @@ function FavoritoServ(props) {
       .storage()
       .ref(`servicios-imagenes/${image}`)
       .getDownloadURL()
-      .then(response => {
+      .then((response) => {
         setImageServicio(response);
       });
   }, []);
@@ -141,12 +138,12 @@ function FavoritoServ(props) {
       [
         {
           text: "Cancel",
-          style: "cancel"
+          style: "cancel",
         },
         {
           text: "Eliminar",
-          onPress: removeFavorite
-        }
+          onPress: removeFavorite,
+        },
       ],
       { cancelable: false }
     );
@@ -158,8 +155,8 @@ function FavoritoServ(props) {
       .where("idServicio", "==", id)
       .where("idUser", "==", firebase.auth().currentUser.uid)
       .get()
-      .then(response => {
-        response.forEach(doc => {
+      .then((response) => {
+        response.forEach((doc) => {
           const idFavorite = doc.id;
           db.collection("favorites")
             .doc(idFavorite)
@@ -183,7 +180,7 @@ function FavoritoServ(props) {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Servicio", {
-            servicioFavorito: servicioFavorito.item
+            servicioFavorito: servicioFavorito.item,
           })
         }
       >
@@ -245,18 +242,18 @@ function UserNoLogged(props) {
 const styles = StyleSheet.create({
   viewBody: {
     flex: 1,
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#f2f2f2",
   },
   loaderRestaurants: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   restaurant: {
-    margin: 10
+    margin: 10,
   },
   image: {
     width: 394,
-    height: 180
+    height: 180,
   },
   info: {
     flex: 1,
@@ -268,16 +265,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     marginTop: -30,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   name: {
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 20,
   },
   favorite: {
     marginTop: -35,
     backgroundColor: "#fff",
     padding: 15,
-    borderRadius: 100
-  }
+    borderRadius: 100,
+  },
 });
