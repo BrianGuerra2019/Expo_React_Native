@@ -23,7 +23,7 @@
     "firebase": "^7.8.2",
     "firesql": "^2.0.2",
     "install": "^0.13.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mdn-browser-compat-data": "^1.0.10",
     "node-pre-gyp": "^0.14.0",
     "react": "16.9.0",
